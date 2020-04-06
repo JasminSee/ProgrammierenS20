@@ -85,6 +85,7 @@ public class Game implements ITickableListener, IKeyboardListener{
 		//Wenn 5 Ufos abgeschossen wurden, erscheint Nachricht, dass man gewonnen hat
 		if (ufos.size() == 5) {
 			frameWork.removeTick(this);
+			frameWork.removeIKeyboardInput(this);
 			win.setMessage("You won!");
 		}
 
