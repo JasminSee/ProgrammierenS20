@@ -1,0 +1,1 @@
+Schreibt mit Hilfe des PrintWriters einen Text in eine Datei. Diesen Text sollt ihr mit Hilfe des Scanners wieder einlesen.
