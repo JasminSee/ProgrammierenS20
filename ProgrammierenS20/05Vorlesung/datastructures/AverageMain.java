@@ -1,36 +1,41 @@
 package datastructures;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AverageMain {
 
 	public static void main(String[] args) {
 		
-//		Szenario: Ein Benutzer soll solange neue double Werte eingeben können, bis er „quit“eingibt. 
-//		Aus diesen Werten soll anschließend der Mittelwert berechnet und ausgegeben werden.
-//		Überlegt euch welche Datenstruktur die performanteste für den Fall ist und erstellt das entsprechende Programm.
+//		Szenario: Ein Benutzer soll solange neue double Werte eingeben kÃ¶nnen, bis er â€žquitâ€œeingibt. 
+//		Aus diesen Werten soll anschlieÃŸend der Mittelwert berechnet und ausgegeben werden.
+//		Ãœberlegt euch welche Datenstruktur die performanteste fÃ¼r den Fall ist und erstellt das entsprechende Programm.
 		
-		ArrayList<Double> values = new ArrayList<>();
+		ArrayList<Double> values = new ArrayList<Double>();
 		double a = 0;
 		
 		Scanner in = new Scanner(System.in);
 		
 		System.out.println("Geben Sie Werte ein und beenden Sie mit 'quit': ");
 		
-		while (in.hasNextDouble()) {
-			values.add(in.nextDouble());
-			if ((in.next()).equals("quit")) {
-				in.close();
+		try {
+			while (true) {
+				if (!in.hasNextDouble() && in.next().equals("quit")) {
+					in.close();
+					break;
+				} else {
+					values.add(in.nextDouble());
+				} 
 			}
-		} 
-		
-		in.close();
-		
-		for (double i : values) {
-			a += i;
+			for (double i : values) {
+				a += i;
+			}
+			
+			System.out.println("Mittelwert: " + (a/values.size()));
+			
+		} catch (InputMismatchException e) {
+			System.out.println("UngÃ¼ltige Eingabe");
 		}
-		
-		System.out.println("Mittelwert: " + (a/values.size()));
 	}
 }
