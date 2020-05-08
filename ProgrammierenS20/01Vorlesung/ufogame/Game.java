@@ -75,6 +75,7 @@ public class Game implements ITickableListener, IKeyboardListener{
 			ufo.move();
 		}
 		//Fliegt Ufo rechts aus dem Bild, fliegt naechstest links wieder rein
+		//TODO du kannst auch schreiben if(!ufos.isEmpty()...)
 		if(ufos.size() > 0 && ufos.get(0).getX() > screenWidth) {
 			frameWork.removeGameObject(ufos.get(0));
 			ufos.remove(0);
@@ -83,6 +84,7 @@ public class Game implements ITickableListener, IKeyboardListener{
 			frameWork.addGameObject(ufos.get(ufos.size()-1));
 		}  
 		//Wenn 5 Ufos abgeschossen wurden, erscheint Nachricht, dass man gewonnen hat
+		//TODO benutze keine magic numbers. Erstelle eine Variable oder Konstante für die 5
 		if (ufos.size() == 5) {
 			frameWork.removeTick(this);
 			frameWork.removeIKeyboardInput(this);
@@ -108,12 +110,15 @@ public class Game implements ITickableListener, IKeyboardListener{
 		//Entfernen des Projektiles und des Ufos, wenn kollidiert
 		for (Ufo ufo : ufos) {
 			for (Projectile projectile : projectiles) {
+				//TODO Tipp: wenn du im Spiel nur dann eine Kollision angezeigt bekommen willst, wenn die Bilder mit einander kollidieren, kannst du die unsichtbaren Ränder der Bilder abschneiden
+				//TODO die Kollisionsabfrage ist super!
 				if ((ufo.getX() < projectile.getX() + projectile.getWidth()) &&
 					(ufo.getY() < projectile.getY() + projectile.getHeight()) &&
 					(ufo.getX() + ufo.getWidth() > projectile.getX()) &&
 					(ufo.getY() + ufo.getHeight() > projectile.getY())){
 						frameWork.removeGameObject(ufo);
 						frameWork.removeGameObject(projectile);
+						//TODO wenn der User nicht nach 5 Treffern gewonnen hätte, müsstest du hier auch wieder neue Ufos hinzufügen 
 						ufos.remove(ufo);
 						points += 1;
 						return true;

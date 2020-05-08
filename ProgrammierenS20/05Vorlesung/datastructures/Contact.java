@@ -3,8 +3,12 @@ package datastructures;
 import java.io.Serializable;
 
 public class Contact implements Comparable<Contact>, Serializable {
-	
-//	private static final long serialVersionUID = 1L;
+	//TODO ich hatte euch das leider verschwiegen, aber nutze die serialVersionUID
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4849232455319714752L;
+	//	private static final long serialVersionUID = 1L;
 	private long number;
 	private String name;
 

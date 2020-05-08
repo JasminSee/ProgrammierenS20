@@ -32,7 +32,11 @@ public class AccountMain {
 		int number = in.nextInt();
 		
 		Account a = new Account(name, number);
-		
+
+		//TODO du kannst abfragen, ob dieses Objekt in der Datenstruktur vorhanden ist_
+		//TODO mit: if(accounts.contains(a))
+		//TODO Aber diese Abfrage brauchst du auch nur, wenn du eine entsprechende Ausgabe haben willst. 
+		//Sonst kannst du immer sagen accounts.add(a), da eine HashSet eh jedes Element nur einmal enthalten kann
 		for (Account i : accounts) {
 			if (i.equals(a)) {
 				valid = true;

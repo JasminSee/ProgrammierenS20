@@ -12,6 +12,7 @@ public class AverageMain {
 //		Aus diesen Werten soll anschlieÃŸend der Mittelwert berechnet und ausgegeben werden.
 //		Ãœberlegt euch welche Datenstruktur die performanteste fÃ¼r den Fall ist und erstellt das entsprechende Programm.
 		
+		//TODO hier wäre eine LinkedList eine gute Option.
 		ArrayList<Double> values = new ArrayList<Double>();
 		double a = 0;
 		
@@ -20,6 +21,8 @@ public class AverageMain {
 		System.out.println("Geben Sie Werte ein und beenden Sie mit 'quit': ");
 		
 		try {
+			//TODO verwende nur wenn es absolut nicht anders geht eine while(true), dass ist sehr sehr selten
+			//TODO Die Abbruchbedingung könnte könnte z.B. so aussehen: while(in.hasNextDouble() && !in.next().equals("quit")) {
 			while (true) {
 				if (!in.hasNextDouble() && in.next().equals("quit")) {
 					in.close();
