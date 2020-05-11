@@ -33,5 +33,6 @@ public class ReaderThread extends Thread {
 	
 	public void quit() {
 		isRunning = false;
+		scanner.close();
 	}
 }
