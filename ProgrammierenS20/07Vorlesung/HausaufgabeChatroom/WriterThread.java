@@ -10,28 +10,33 @@ public class WriterThread extends Thread {
 	private ArrayList<PrintWriter> printWriterList;
 	boolean isRunning = true;
 	
-	WriterThread (BlockingQueue<String> queMessages, ArrayList<PrintWriter> quePrintwriter) {
+	WriterThread (BlockingQueue<String> queue, ArrayList<PrintWriter> printWriterList) {
 		super();
-		this.queue = queMessages;
-		this.printWriterList = quePrintwriter;
+		this.queue = queue;
+		this.printWriterList = printWriterList;
 	}
 	
 	@Override
 	public void run() {
 		while (isRunning) {
 			try {
-				if(!queue.isEmpty()) {
+				//queue blockiert, wenn keine Nachricht enthalten ist, daher Abfrage, ob queue != 0 ist, nicht noetig
+				String message = queue.take();
+				synchronized (printWriterList) {
 					for (PrintWriter printWriter: printWriterList) {
-						printWriter.println(queue.take());
-						printWriter.flush();
+						try {
+							printWriter.println(message);
+							printWriter.flush();
+						} catch (Exception e) {
+							e.printStackTrace();
+							System.out.println("Fehler WriterThread");
+						}
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println("Fehler WriterThread");
 			}
-		}
-		for (PrintWriter printWriter: printWriterList) {
-			printWriter.close();
 		}
 	}
 	

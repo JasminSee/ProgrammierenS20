@@ -8,7 +8,6 @@ public class ReaderThread extends Thread {
 	private Scanner scanner;
 	private BlockingQueue<String> queue;
 	private boolean isRunning = true;
-	private String message;
 	
 	public ReaderThread (Scanner scanner, BlockingQueue<String> queue) {
 		super();
@@ -21,12 +20,13 @@ public class ReaderThread extends Thread {
 		
 		while (isRunning) {
 			try {
-				message = scanner.nextLine();
+				String message = scanner.nextLine();
 				System.out.println(message);
 				queue.put(message);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
+				System.out.println("Fehler ReaderThread");
 			}
 		}
 	}

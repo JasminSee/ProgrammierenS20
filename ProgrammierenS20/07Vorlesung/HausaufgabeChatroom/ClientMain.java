@@ -30,6 +30,7 @@ public class ClientMain {
  			 
  		} catch (Exception e) { 
  			e.printStackTrace(); 
+ 			System.out.println("Fehler ClientMain");
  		}
  	} 
  

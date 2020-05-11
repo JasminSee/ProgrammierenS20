@@ -9,7 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class ServerMain { 
 	
-	boolean isRunning = true;
+	private boolean isRunning = true;
 	
 	public void createServer() { 
 		
@@ -41,6 +41,7 @@ public class ServerMain {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Fehler ServerMain");
 		}
 	}
 	

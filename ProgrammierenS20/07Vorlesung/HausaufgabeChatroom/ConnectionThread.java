@@ -13,14 +13,13 @@ public class ConnectionThread extends Thread {
 	private BlockingQueue<String> queue;
 	private ArrayList<ReaderThread> readerThreadList;
 	private ServerSocket server;
-	
-	boolean isRunning = true;
+	private boolean isRunning = true;
 	
 	public ConnectionThread(ArrayList<PrintWriter> printWriterList, BlockingQueue<String> queue, ServerSocket server) {
 		this.printWriterList = printWriterList;
 		this.queue = queue;
 		this.server = server;
-		readerThreadList = new ArrayList<ReaderThread>();
+		this.readerThreadList = new ArrayList<ReaderThread>();
 	}
 	
 	@Override
@@ -28,6 +27,7 @@ public class ConnectionThread extends Thread {
 		
 		ReaderThread readerThread = null;
 		Scanner scanner = null;
+		PrintWriter printWriter = null;
 		
 		while(isRunning) {
 			try {
@@ -38,18 +38,21 @@ public class ConnectionThread extends Thread {
 				scanner = new Scanner(client.getInputStream());
 				
 				readerThread = new ReaderThread(scanner, queue);
-				
 				readerThreadList.add(readerThread);
-				printWriterList.add(new PrintWriter(client.getOutputStream()));
+				
+				printWriter = new PrintWriter(client.getOutputStream());
+				printWriterList.add(printWriter);
 				
 				readerThread.start();
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println("Fehler ConnectionThread");
 			}
 		}
 		readerThread.quit();
 		scanner.close();
+		printWriter.close();
 	}
 	public void quit() {
 		isRunning = false;
